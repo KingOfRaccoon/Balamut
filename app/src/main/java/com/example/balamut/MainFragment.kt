@@ -23,8 +23,6 @@ class MainFragment: Fragment(){
     ): View? {
         val view =  super.onCreateView(inflater, container, savedInstanceState)
 
-
-
         val but_progress : Button = view!!.findViewById(R.id.item_progress)
         val but_action : Button = view.findViewById(R.id.item_action)
         val but_profile : Button = view.findViewById(R.id.item_profile)
