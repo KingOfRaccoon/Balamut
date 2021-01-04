@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_progress">
+
+    <fragment
+        android:id="@+id/navigation_progress"
+        android:name="com.example.balamut.ui.progress.ProgressFragment"
+        android:label="@string/item_progress"
+        tools:layout="@layout/fragment_progress" />
+
+    <fragment
+        android:id="@+id/navigation_action"
+        android:name="com.example.balamut.ui.profile.ProfileFragment"
+        android:label="@string/item_action"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.balamut.ui.action.ActionFragment"
+        android:label="@string/item_profile"
+        tools:layout="@layout/fragment_action" />
+</navigation>
