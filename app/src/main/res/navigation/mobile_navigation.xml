@@ -3,23 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_progress">
+    app:startDestination="@id/authorizationFragment2">
 
-    <fragment
-        android:id="@+id/navigation_progress"
-        android:name="com.example.balamut.ui.progress.ProgressFragment"
-        android:label="@string/item_progress"
-        tools:layout="@layout/fragment_progress" />
+        <navigation
 
-    <fragment
-        android:id="@+id/navigation_action"
-        android:name="com.example.balamut.ui.profile.ProfileFragment"
-        android:label="@string/item_action"
-        tools:layout="@layout/fragment_profile" />
+            android:id="@+id/navigation"
+            app:startDestination="@id/navigation_progress">
+                <fragment
+                    android:id="@+id/navigation_action"
+                    android:name="com.example.balamut.ui.profile.ProfileFragment"
+                    android:label="@string/item_action"
+                    tools:layout="@layout/fragment_profile" />
+                <fragment
+                    android:id="@+id/navigation_profile"
+                    android:name="com.example.balamut.ui.action.ActionFragment"
+                    android:label="@string/item_profile"
+                    tools:layout="@layout/fragment_action" />
+                <fragment
+                    android:id="@+id/navigation_progress"
+                    android:name="com.example.balamut.ui.progress.ProgressFragment"
+                    android:label="@string/item_progress"
+                    tools:layout="@layout/fragment_progress" />
+        </navigation>
+        <fragment
+            android:id="@+id/authorizationFragment2"
+            android:name="com.example.balamut.AuthorizationFragment"
+            android:label="fragment_authorization"
+            tools:layout="@layout/fragment_authorization" >
+                <action
+                    android:id="@+id/action_authorizationFragment2_to_navigation"
+                    app:destination="@id/navigation" />
+                <action
+                    android:id="@+id/action_authorizationFragment2_to_registGoogleFragment"
+                    app:destination="@id/registGoogleFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/registGoogleFragment"
+            android:name="com.example.balamut.RegistGoogleFragment"
+            android:label="fragment_regist_google"
+            tools:layout="@layout/fragment_regist_google" />
 
-    <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.example.balamut.ui.action.ActionFragment"
-        android:label="@string/item_profile"
-        tools:layout="@layout/fragment_action" />
 </navigation>

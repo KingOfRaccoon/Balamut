@@ -12,18 +12,18 @@ import com.example.balamut.R
 
 class ProgressFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var progressViewModel: ProgressViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        progressViewModel =
+            ViewModelProvider(this).get(ProgressViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_progress, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = root.findViewById(R.id.text_progress)
+        progressViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

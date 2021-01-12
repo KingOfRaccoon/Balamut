@@ -3,10 +3,13 @@
     <string name="item_action">Мероприятия</string>
     <string name="item_progress">Прогресс</string>
     <string name="item_profile">Профиль</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_start">StartActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="signIn_with_google">Continue with Google</string>
+    <string name="signIn_with_number">Use phone number</string>
 </resources>

@@ -12,18 +12,18 @@ import com.example.balamut.R
 
 class ActionFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var actionViewModel: ActionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        actionViewModel =
+            ViewModelProvider(this).get(ActionViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_action, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        actionViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
