@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import java.lang.Exception
 
 
 class RegistGoogleFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener {
@@ -26,7 +27,7 @@ class RegistGoogleFragment : Fragment(), GoogleApiClient.OnConnectionFailedListe
 
     lateinit var gso: GoogleSignInOptions
     lateinit var mGoogleSignInClient: GoogleSignInClient
-    lateinit var account: GoogleSignInAccount
+    var account: GoogleSignInAccount? = null
 
     lateinit var txtName: TextView
     lateinit var txtEmail: TextView
@@ -53,6 +54,7 @@ class RegistGoogleFragment : Fragment(), GoogleApiClient.OnConnectionFailedListe
         txtId = view.findViewById(R.id.txtId)
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken("872625969871-benrknjhabumq38mgd8he4jt4l2ea7sl.apps.googleusercontent.com")
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
@@ -94,14 +96,22 @@ class RegistGoogleFragment : Fragment(), GoogleApiClient.OnConnectionFailedListe
 
         if (requestCode == RC_SIGN_IN) {
             val task: Task<GoogleSignInAccount>? = GoogleSignIn.getSignedInAccountFromIntent(data)
-            if (task?.isSuccessful == true){
-                handleSignInResult(task)
+            task?.addOnCompleteListener {
+                it.addOnSuccessListener {
+                    handleSignInResult(task)
+                }
+                        .addOnFailureListener {
+                            Log.e(TAG, it.message.toString())
+                        }
+            }
+//            if (task?.isSuccessful == true){
+//                handleSignInResult(task)
                 //account = task.getSignInAccount()
-            }
-            else {
-                updateUI(null)
-                Log.w(TAG, "Sign in faild")
-            }
+//            }
+//            else {
+//                updateUI(null)
+//                Log.e(TAG, task?.?.message.toString())
+//            }
             /*try {
                 account = task?.getResult(ApiException::class.java)!!
                 Log.d(TAG, "OnActivityResult ${account.id} and ${account.email}")
@@ -126,14 +136,17 @@ class RegistGoogleFragment : Fragment(), GoogleApiClient.OnConnectionFailedListe
 
     override fun onStart() {
         super.onStart()
-        account = GoogleSignIn.getLastSignedInAccount(requireContext())!!
+            account = GoogleSignIn.getLastSignedInAccount(requireContext())
 
-        if (account != null) {
-            Log.d(TAG, "Got cached sign-in")
-            var name: String = account.displayName!!
-            var email : String = account.email!!
-            var id : String = account.id!!
-        } //else {
+            if (account != null) {
+                Log.d(TAG, "Got cached sign-in")
+                var name: String = account?.displayName!!
+                var email : String = account?.email!!
+                var id : String = account?.id!!
+            }
+
+
+         //else {
             //account.setResultCallback { googleSignInResult -> handleSignInResult(googleSignInResult) }
             //updateUI(null)
        // }
@@ -141,9 +154,9 @@ class RegistGoogleFragment : Fragment(), GoogleApiClient.OnConnectionFailedListe
 
     private fun updateUI(isSignedIn: GoogleSignInAccount?) {
         if (isSignedIn != null){
-            txtEmail.setText(account.id)
-            txtId.setText(account.id)
-            txtName.setText(account.displayName)
+            txtEmail.setText(account?.id)
+            txtId.setText(account?.id)
+            txtName.setText(account?.displayName)
         }
          else {
             Log.d(TAG, "updateUI ERROR")
